@@ -1,4 +1,5 @@
 from bus.bus import Bus
+from device.temperaturesensor_device import TemperaturesensorDevice
 
 class Pimotica():
     bus = None

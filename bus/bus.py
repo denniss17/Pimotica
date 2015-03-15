@@ -25,19 +25,21 @@ class Bus():
         """Return all devices on this bus"""
         return self.devices
         
-    def updateValue(self, name, value):
+    def updateValue(self, device, variable, value):
         """Update a value with a new value and notify all devices"""
-        self.values[name] = value
-        self.notifyDevices(name, value)
+        if device not in self.values:
+            self.values[device] = dict()
+        self.values[device][variable] = value
+        self.notifyDevices(device, variable, value)
         
     def getValue(self, name):
         """Return the current value of the value with the given name"""
         return self.values[name] if name in self.values else None
         
-    def notifyDevices(self, name, value):
+    def notifyDevices(self, name, variable, value):
         """Notify all devices that a certain value has changed"""
         for device in self.devices:
-            device.notify(name, value)
+            device.notify(device, variable, value)
         
         
     
